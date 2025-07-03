@@ -3,8 +3,8 @@
 namespace SmartCms\Menu;
 
 use Livewire\Features\SupportTesting\Testable;
-use SmartCms\Menu\Testing\TestsMenu;
 use SmartCms\Menu\Commands\MakeMenuTypeCommand;
+use SmartCms\Menu\Testing\TestsMenu;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
