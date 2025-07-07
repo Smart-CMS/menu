@@ -3,6 +3,7 @@
 namespace SmartCms\Menu;
 
 use Filament\Forms\Components\Field;
+use InvalidArgumentException;
 use SmartCms\Menu\MenuTypes\LinkMenuType;
 
 class MenuRegistry
@@ -11,22 +12,29 @@ class MenuRegistry
 
     public function __construct()
     {
-        $this->register(new LinkMenuType);
+        $this->register(LinkMenuType::class);
     }
 
-    public function register(MenuTypeInterface $class): void
+    public function register(string $class): void
     {
-        $this->menus[$class->getType()] = $class;
+        if (! is_subclass_of($class, MenuTypeInterface::class)) {
+            throw new InvalidArgumentException("Class $class must implement MenuTypeInterface");
+        }
+        $this->menus[(new $class)->getType()] = $class;
     }
 
     public function get(string $type): ?MenuTypeInterface
     {
-        return $this->menus[$type] ?? null;
+        if (isset($this->menus[$type])) {
+            return new $this->menus[$type];
+        }
+
+        return null;
     }
 
     public function all(): array
     {
-        return collect($this->menus)->mapWithKeys(fn (MenuTypeInterface $menu) => [$menu->getType() => $menu->getLabel()])->toArray();
+        return collect($this->menus)->mapWithKeys(fn (string $class) => [(new $class)->getType() => (new $class)->getLabel()])->toArray();
     }
 
     public function getSchemaByType(string $type): ?Field
@@ -35,11 +43,8 @@ class MenuRegistry
         if (! $schema) {
             return null;
         }
-        if (method_exists($schema, 'required')) {
-            $schema->required();
-        }
 
-        return $schema->columnSpanFull();
+        return $schema->required()->columnSpanFull();
     }
 
     public function getLinkByType(array $item): ?string

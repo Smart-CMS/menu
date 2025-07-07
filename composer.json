@@ -24,7 +24,7 @@
         "php": "^8.2",
         "filament/filament": "^4.0",
         "smart-cms/lang": "^1.0",
-        "smart-cms/support": "^1.0",
+        "smart-cms/support": "*",
         "spatie/laravel-package-tools": "^1.15.0"
     },
     "require-dev": {
@@ -53,7 +53,7 @@
     },
     "scripts": {
         "post-autoload-dump": "@php ./vendor/bin/testbench package:discover --ansi",
-        "analyse": "phpstan analyse",
+        "analyse": "phpstan analyse --memory-limit 1G -c phpstan.neon.dist ",
         "lint": "pint",
         "test": "pest",
         "test:lint": "pint --test"

@@ -51,6 +51,7 @@ class Menu extends Model
     {
         return Attribute::make(
             get: function (): Collection {
+                /** @phpstan-ignore-next-line */
                 return collect($this->items)->map(function ($item) {
                     return (object) [
                         'title' => $this->getItemName($item),
