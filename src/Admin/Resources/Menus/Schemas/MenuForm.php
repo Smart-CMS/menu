@@ -81,8 +81,12 @@ class MenuForm
                                         if (! $type) {
                                             return [];
                                         }
+                                        $field = app(MenuRegistry::class)->getSchemaByType($type);
+                                        if (! $field) {
+                                            return [];
+                                        }
 
-                                        return [app(MenuRegistry::class)->getSchemaByType($type)];
+                                        return [$field];
                                     }),
                                     Flex::make([
                                         StatusField::make('status')->inline(false),
