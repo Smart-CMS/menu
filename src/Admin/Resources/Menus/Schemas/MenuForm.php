@@ -82,9 +82,10 @@ class MenuForm
                                             return [];
                                         }
                                         $field = app(MenuRegistry::class)->getSchemaByType($type);
-                                        if (!$field) {
+                                        if (! $field) {
                                             return [];
                                         }
+
                                         return [$field];
                                     }),
                                     Flex::make([

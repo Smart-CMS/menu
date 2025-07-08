@@ -34,7 +34,7 @@ class MenuRegistry
 
     public function all(): array
     {
-        return collect($this->menus)->mapWithKeys(fn(string $class) => [(new $class)->getType() => (new $class)->getLabel()])->toArray();
+        return collect($this->menus)->mapWithKeys(fn (string $class) => [(new $class)->getType() => (new $class)->getLabel()])->toArray();
     }
 
     public function getSchemaByType(string $type): ?Field
@@ -43,6 +43,7 @@ class MenuRegistry
         if (! $schema) {
             return null;
         }
+
         return $schema->required()->columnSpanFull();
     }
 
