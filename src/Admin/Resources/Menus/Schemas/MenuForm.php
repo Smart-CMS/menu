@@ -14,7 +14,6 @@ use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Components\Utilities\Set;
 use Filament\Schemas\Schema;
 use SmartCms\Menu\MenuRegistry;
-use SmartCms\Support\Admin\Components\Forms\NameField;
 use SmartCms\Support\Admin\Components\Forms\StatusField;
 use SmartCms\Support\Admin\Components\Layout\Aside;
 use SmartCms\Support\Admin\Components\Layout\FormGrid;
