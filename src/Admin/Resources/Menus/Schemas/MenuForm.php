@@ -30,9 +30,8 @@ class MenuForm
                 FormGrid::make()->schema([
                     LeftGrid::make()->schema([
                         Section::make()->schema([
-                            NameField::make('name'),
+                            TextInput::make('name'),
                         ]),
-
                         Section::make('Items')->compact()->schema([
                             Repeater::make('items')
                                 ->label('Menu Items')
