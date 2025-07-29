@@ -7,4 +7,5 @@ return [
     'open_in_new_tab' => 'Open in new tab',
     'url' => 'URL',
     'menu' => 'Menu',
+    'items_count' => 'Items count',
 ];

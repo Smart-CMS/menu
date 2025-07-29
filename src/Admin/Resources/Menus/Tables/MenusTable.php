@@ -5,7 +5,10 @@ namespace SmartCms\Menu\Admin\Resources\Menus\Tables;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\TextInputColumn;
 use Filament\Tables\Table;
+use SmartCms\Menu\Models\Menu;
 use SmartCms\Support\Admin\Components\Tables\CreatedAtColumn;
 use SmartCms\Support\Admin\Components\Tables\NameColumn;
 use SmartCms\Support\Admin\Components\Tables\UpdatedAtColumn;
@@ -17,15 +20,19 @@ class MenusTable
         return $table
             ->columns([
                 NameColumn::make(),
+                TextColumn::make('items_count')
+                    ->label(__('menu::admin.items_count'))
+                    ->badge()
+                    ->getStateUsing(fn(Menu $record) => count($record->items))
+                    ->sortable()
+                    ->searchable(),
                 UpdatedAtColumn::make(),
                 CreatedAtColumn::make(),
             ])
             ->filters([
                 //
             ])
-            ->recordActions([
-                EditAction::make(),
-            ])
+            ->recordActions([])
             ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),

@@ -102,7 +102,7 @@ class MenuForm
                     ]),
                     RightGrid::make()->schema([
                         Aside::make(false),
-                    ]),
+                    ])->hiddenOn('create'),
                 ]),
             ]);
     }
