@@ -4,9 +4,7 @@ namespace SmartCms\Menu\Admin\Resources\Menus\Tables;
 
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
-use Filament\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Columns\TextInputColumn;
 use Filament\Tables\Table;
 use SmartCms\Menu\Models\Menu;
 use SmartCms\Support\Admin\Components\Tables\CreatedAtColumn;
@@ -23,7 +21,7 @@ class MenusTable
                 TextColumn::make('items_count')
                     ->label(__('menu::admin.items_count'))
                     ->badge()
-                    ->getStateUsing(fn(Menu $record) => count($record->items))
+                    ->getStateUsing(fn (Menu $record) => count($record->items))
                     ->sortable()
                     ->searchable(),
                 UpdatedAtColumn::make(),
