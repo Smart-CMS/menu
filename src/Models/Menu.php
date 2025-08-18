@@ -53,7 +53,7 @@ class Menu extends Model
             get: function (): Collection {
                 /** @phpstan-ignore-next-line */
                 return collect($this->items)->map(function ($item) {
-                    return (object) [
+                    return [
                         'title' => $this->getItemName($item),
                         'url' => app(MenuRegistry::class)->getLinkByType($item),
                     ];
