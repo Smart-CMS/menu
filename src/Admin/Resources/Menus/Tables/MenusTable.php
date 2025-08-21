@@ -21,7 +21,7 @@ class MenusTable
                 TextColumn::make('items_count')
                     ->label(__('menu::admin.items_count'))
                     ->badge()
-                    ->getStateUsing(fn (Menu $record) => count($record->items))
+                    ->getStateUsing(fn(Menu $record) => count($record->getTranslations('items')[main_lang()] ?? []))
                     ->sortable()
                     ->searchable(),
                 UpdatedAtColumn::make(),

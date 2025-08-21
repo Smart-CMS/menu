@@ -12,5 +12,5 @@ interface MenuTypeInterface
 
     public function getSchema(): Field;
 
-    public function getLinkFromItem(mixed $item): string;
+    public function getLinkFromItem(mixed $item): string|array;
 }

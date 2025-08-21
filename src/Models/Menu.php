@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use SmartCms\Menu\MenuRegistry;
+use Spatie\Translatable\HasTranslations;
 
 /**
  * Class Menu
@@ -14,14 +15,18 @@ use SmartCms\Menu\MenuRegistry;
  * @property int $id The unique identifier for the model.
  * @property string $name The name of the menu.
  * @property array|null $items The menu items configuration.
+ * @property-read Collection $links The menu links.
  * @property \DateTime $created_at The date and time when the model was created.
  * @property \DateTime $updated_at The date and time when the model was last updated.
  */
 class Menu extends Model
 {
     use HasFactory;
+    use HasTranslations;
 
     protected $guarded = [];
+
+    protected $translatable = ['items'];
 
     protected $casts = [
         'items' => 'array',
@@ -32,31 +37,24 @@ class Menu extends Model
      */
     public function getTable(): string
     {
-        return config('menu.menus_table_name');
-    }
-
-    /**
-     * Get menu item title
-     */
-    public function getItemName(array $item): string
-    {
-        if (app('lang')->frontLanguages()->count() > 1) {
-            return $item[current_lang()] ?? $item['title'] ?? 'Untitled';
-        }
-
-        return $item['title'] ?? 'Untitled';
+        return config('menu.menus_table_name', 'menus');
     }
 
     public function links(): Attribute
     {
         return Attribute::make(
             get: function (): Collection {
-                /** @phpstan-ignore-next-line */
                 return collect($this->items)->map(function ($item) {
-                    return [
-                        'title' => $this->getItemName($item),
-                        'url' => app(MenuRegistry::class)->getLinkByType($item),
+                    $data = [
+                        'title' => $item['title'] ?? 'Untitled',
                     ];
+                    $url = app(MenuRegistry::class)->getLinkByType($item);
+                    if (is_array($url)) {
+                        $data = array_merge($data, $url);
+                    } else {
+                        $data['url'] = $url;
+                    }
+                    return $data;
                 });
             }
         );
