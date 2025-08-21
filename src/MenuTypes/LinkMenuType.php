@@ -23,7 +23,7 @@ class LinkMenuType implements MenuTypeInterface
         return TextInput::make('url')->label(__('menu::admin.url'));
     }
 
-    public function getLinkFromItem(mixed $item): string|array
+    public function getLinkFromItem(mixed $item): string | array
     {
         return asset($item['url'] ?? '#');
     }

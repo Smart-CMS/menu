@@ -29,7 +29,7 @@ class NestedMenuType implements MenuTypeInterface
             ->required();
     }
 
-    public function getLinkFromItem(mixed $item): string|array
+    public function getLinkFromItem(mixed $item): string | array
     {
         if (! isset($item['menu_id'])) {
             return '#';
@@ -39,6 +39,7 @@ class NestedMenuType implements MenuTypeInterface
         if (! $nestedMenu) {
             return '#';
         }
+
         return [
             'url' => '',
             'children' => $nestedMenu->links,

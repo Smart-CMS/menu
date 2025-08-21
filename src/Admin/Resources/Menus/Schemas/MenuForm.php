@@ -2,8 +2,6 @@
 
 namespace SmartCms\Menu\Admin\Resources\Menus\Schemas;
 
-use Filament\Actions\Action;
-use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
@@ -13,7 +11,6 @@ use Filament\Schemas\Components\Section;
 use Filament\Schemas\Components\Tabs;
 use Filament\Schemas\Components\Tabs\Tab;
 use Filament\Schemas\Components\Utilities\Get;
-use Filament\Schemas\Components\Utilities\Set;
 use Filament\Schemas\Schema;
 use SmartCms\Lang\Models\Language;
 use SmartCms\Menu\MenuRegistry;
@@ -75,7 +72,7 @@ class MenuForm
                                         ->columns(2)
                                         ->defaultItems(0)
                                         ->reorderableWithButtons()
-                                        ->collapsible()
+                                        ->collapsible(),
                                 ]);
                             })->toArray();
                         }),

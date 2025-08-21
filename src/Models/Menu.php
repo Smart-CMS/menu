@@ -54,6 +54,7 @@ class Menu extends Model
                     } else {
                         $data['url'] = $url;
                     }
+
                     return $data;
                 });
             }

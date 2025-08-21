@@ -36,7 +36,7 @@ class MenuRegistry
 
     public function all(): array
     {
-        return collect($this->menus)->mapWithKeys(fn(string $class) => [(new $class)->getType() => (new $class)->getLabel()])->toArray();
+        return collect($this->menus)->mapWithKeys(fn (string $class) => [(new $class)->getType() => (new $class)->getLabel()])->toArray();
     }
 
     public function getSchemaByType(string $type): ?Field
@@ -49,7 +49,7 @@ class MenuRegistry
         return $schema->required()->columnSpanFull();
     }
 
-    public function getLinkByType(array $item): string|array
+    public function getLinkByType(array $item): string | array
     {
         return $this->get($item['type'])?->getLinkFromItem($item);
     }
